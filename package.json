@@ -1,0 +1,37 @@
+{
+  "name": "@krosoft/core",
+  "version": "0.0.1",
+  "description": "Krosoft shared core package",
+  "type": "module",
+  "exports": {
+    "./helpers": {
+      "import": "./dist/helpers/index.js",
+      "types": "./dist/helpers/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@krosoft/tooling-prettier": "^0.0.6",
+    "prettier": "^3.8.1",
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krosoft-dev/krosoft-packages-core.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
