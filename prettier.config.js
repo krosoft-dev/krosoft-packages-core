@@ -1,1 +1,1 @@
-export { default } from '@krosoft/tooling-prettier';
+export { default } from "@krosoft/tooling-prettier";

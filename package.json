@@ -18,11 +18,15 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'",
     "type-check": "tsc --noEmit",
     "test": "vitest run"
   },
   "devDependencies": {
+    "@krosoft/tooling-eslint": "^0.0.3",
     "@krosoft/tooling-prettier": "^0.0.6",
+    "@krosoft/tooling-tsconfig": "^0.0.2",
     "prettier": "^3.8.1",
     "typescript": "^5.0.0",
     "vitest": "^4.1.2"
