@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { hexToRgba } from "../../src/helpers/color.helper";
+import { hexToRgba } from "@/helpers/color.helper";
 
 describe("hexToRgba", () => {
   it("valid 6-digit hex, alpha 100", () => {

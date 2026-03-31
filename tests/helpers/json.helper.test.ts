@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { tryParseJson, beautifyJson } from "../../src/helpers/json.helper";
+import { tryParseJson, beautifyJson } from "@/helpers/json.helper";
 
 describe("tryParseJson", () => {
   it("parses valid JSON", () => {
