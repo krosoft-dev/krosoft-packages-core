@@ -3,6 +3,23 @@
   "version": "0.0.1",
   "description": "Krosoft shared core package",
   "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krosoft-dev/krosoft-packages-core.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./helpers": {
       "import": "./dist/helpers/index.js",
@@ -13,16 +30,6 @@
       "types": "./dist/types/index.d.ts"
     }
   },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "lint": "eslint .",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}'",
-    "type-check": "tsc --noEmit",
-    "test": "vitest run"
-  },
   "devDependencies": {
     "@krosoft/tooling-eslint": ">=0.0.3",
     "@krosoft/tooling-prettier": ">=0.0.6",
@@ -31,12 +38,5 @@
     "typescript": "^5.0.0",
     "jsdom": "^26.1.0",
     "vitest": "^4.1.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/krosoft-dev/krosoft-packages-core.git"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
