@@ -1,1 +1,1 @@
-export * from "./ErrorHttp";
+export * from "./api/ErrorHttp";
