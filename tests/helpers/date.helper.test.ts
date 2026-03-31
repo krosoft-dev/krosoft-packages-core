@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { formatFullDateTime, formatShortDateTime, formatShortDate, formatShortDateTimeNoSeconds, formatTimeSpan } from "@/helpers/date.helper";
+import { describe, expect, it } from "vitest";
+import { formatFullDateTime, formatShortDate, formatShortDateTime, formatShortDateTimeNoSeconds, formatTimeSpan } from "../../src/helpers/date.helper";
 
 const DATE = "2024-06-15T14:30:45";
 

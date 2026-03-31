@@ -1,5 +1,5 @@
+import { extractErrors, getMessage } from "../../src/helpers/error.helper";
 import { describe, it, expect } from "vitest";
-import { extractErrors, getMessage } from "@/helpers/error.helper";
 
 describe("extractErrors", () => {
   it("returns empty array for a plain Error", () => {
