@@ -3,6 +3,3 @@ export interface ErrorHttp {
   message: string | null;
   errors?: string[] | null;
 }
-
-
-

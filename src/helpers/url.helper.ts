@@ -1,6 +1,6 @@
 import { SortOption } from "../types/SortOption";
 
-export function buildUrl(baseUrl: string, params: Record<string, unknown>, sortBy?: SortOption[]): string {
+export function buildUrl(baseUrl: string, params: object, sortBy?: SortOption[]): string {
   const urlParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {

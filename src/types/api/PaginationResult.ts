@@ -5,5 +5,3 @@ export interface PaginationResult<T> {
   pageSize: number;
   totalPages: number;
 }
-
-
