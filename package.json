@@ -30,7 +30,7 @@
        "@krosoft/tooling-eslint": "^0.0.11",
         "@krosoft/tooling-prettier": "^0.0.12",
         "@krosoft/tooling-tsconfig": "^0.0.7",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "typescript": "^5.9.3",
     "jsdom": "^26.1.0",
     "vitest": "^4.1.4"
