@@ -28,7 +28,7 @@
   },
   "devDependencies": {
        "@krosoft/tooling-eslint": "^0.0.11",
-        "@krosoft/tooling-prettier": "^0.0.12",
+        "@krosoft/tooling-prettier": "^0.0.13",
         "@krosoft/tooling-tsconfig": "^0.0.7",
     "prettier": "^3.8.2",
     "typescript": "^5.9.3",
