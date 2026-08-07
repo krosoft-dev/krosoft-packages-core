@@ -11,3 +11,6 @@ jobs:
     permissions:
       id-token: write
     uses: krosoft-dev/Krosoft.DevOps.GitHub/.github/workflows/npm-build.yml@main
+    with:
+      run-lint: true
+      run-type-check: true
