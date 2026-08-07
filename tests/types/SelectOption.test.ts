@@ -8,10 +8,11 @@ describe("SelectOption", () => {
     expect(option.label).toBe("Français");
   });
 
-  it("has value and label typed as string", () => {
-    expectTypeOf<SelectOption>().toEqualTypeOf<{ value: string; label: string }>();
+  it("has value and label typed as string, and an optional color", () => {
+    expectTypeOf<SelectOption>().toEqualTypeOf<{ value: string; label: string; color?: string }>();
     expectTypeOf<SelectOption["value"]>().toBeString();
     expectTypeOf<SelectOption["label"]>().toBeString();
+    expectTypeOf<SelectOption["color"]>().toEqualTypeOf<string | undefined>();
   });
 
   it("can be used in an array (typical select usage)", () => {
@@ -20,7 +21,7 @@ describe("SelectOption", () => {
       { value: "2", label: "Deux" },
     ];
     expect(options).toHaveLength(2);
-    expect(options.map((o) => o.value)).toEqual(["1", "2"]);
+    expect(options.map(o => o.value)).toEqual(["1", "2"]);
   });
 
   it("supports empty strings", () => {
