@@ -15,6 +15,15 @@
  * (`skipWaiting` + `clientsClaim`, le comportement de vite-plugin-pwa en
  * `registerType: "autoUpdate"`) et rechargerait la page sans nouvelle version.
  *
+ * Réservée au mode `registerType: "autoUpdate"`. En mode `prompt`, ne pas l'utiliser
+ * et préférer `PwaUpdater` de `@krosoft/react/pwa`, qui laisse l'utilisateur décider :
+ *
+ * - sur l'onglet qui accepte la mise à jour, elle ferait doublon — vite-plugin-pwa pose
+ *   déjà son propre écouteur `controlling` qui recharge la page ;
+ * - sur les autres onglets ouverts, `controllerchange` se déclenche aussi et les
+ *   rechargerait sans rien leur demander, ce que la proposition de mise à jour
+ *   cherche précisément à éviter.
+ *
  * No-op si les service workers ne sont pas disponibles — rendu serveur inclus.
  *
  * @returns une fonction pour cesser d'écouter.
