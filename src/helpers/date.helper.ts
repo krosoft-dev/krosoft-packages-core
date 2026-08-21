@@ -1,7 +1,9 @@
-export const formatFullDateTime = (dateString: string | null | undefined): string => {
+import { getLocale } from "./locale.helper";
+
+export const formatFullDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") return "";
 
-  return new Date(dateString).toLocaleDateString("fr-FR", {
+  return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -10,10 +12,10 @@ export const formatFullDateTime = (dateString: string | null | undefined): strin
     second: "2-digit",
   });
 };
-export const formatShortDateTime = (dateString: string | null | undefined): string => {
+export const formatShortDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") return "";
 
-  return new Date(dateString).toLocaleDateString("fr-FR", {
+  return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
     month: "numeric",
     day: "numeric",
@@ -23,20 +25,20 @@ export const formatShortDateTime = (dateString: string | null | undefined): stri
   });
 };
 
-export const formatShortDate = (dateString: string | null | undefined): string => {
+export const formatShortDate = (dateString: string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") return "";
 
-  return new Date(dateString).toLocaleDateString("fr-FR", {
+  return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
     month: "numeric",
     day: "numeric",
   });
 };
 
-export const formatShortDateTimeNoSeconds = (dateString: string | null | undefined): string => {
+export const formatShortDateTimeNoSeconds = (dateString: string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") return "";
 
-  return new Date(dateString).toLocaleDateString("fr-FR", {
+  return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
     month: "numeric",
     day: "numeric",

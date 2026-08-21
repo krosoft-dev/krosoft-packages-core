@@ -1,7 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { formatFullDateTime, formatShortDate, formatShortDateTime, formatShortDateTimeNoSeconds, formatTimeSpan } from "../../src/helpers/date.helper";
+import { resetLocale, setLocale } from "../../src/helpers/locale.helper";
 
 const DATE = "2024-06-15T14:30:45";
+
+afterEach(() => {
+  resetLocale();
+});
 
 describe("formatFullDateTime", () => {
   it("returns empty string for empty input", () => {
@@ -90,5 +95,23 @@ describe("formatTimeSpan", () => {
 
   it("formats a timespan with days, hours, minutes and seconds", () => {
     expect(formatTimeSpan("0:02:15:28.7797708")).toBe("0d 02h 15m 28s");
+  });
+});
+
+describe("locale par défaut", () => {
+  it("follows the locale set on the package", () => {
+    setLocale("en-GB");
+    expect(formatShortDate(DATE)).toBe("15/06/2024");
+    expect(formatFullDateTime(DATE)).toBe("15 Jun 2024, 14:30:45");
+  });
+
+  it("gives precedence to an explicit locale over the default one", () => {
+    setLocale("en-GB");
+    expect(formatShortDate(DATE, "fr-FR")).toBe("15/06/2024");
+    expect(formatFullDateTime(DATE, "fr-FR")).toBe("15 juin 2024, 14:30:45");
+  });
+
+  it("formats with the US convention", () => {
+    expect(formatShortDate(DATE, "en-US")).toBe("6/15/2024");
   });
 });
