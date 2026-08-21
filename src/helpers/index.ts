@@ -1,4 +1,5 @@
 export * from "./color.helper";
+export * from "./locale.helper";
 export * from "./json.helper";
 export * from "./number.helper";
 export * from "./date.helper";
