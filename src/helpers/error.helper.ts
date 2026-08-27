@@ -77,6 +77,21 @@ export const toErrorHttp = (status: number, data: unknown): ErrorHttp => {
 /** Vrai si l'erreur est une erreur réseau (jamais parvenue à l'API : voir `NETWORK_ERROR_CODE`). */
 export const isErrorNetwork = (error: unknown): boolean => isErrorHttp(error) && error.code === NETWORK_ERROR_CODE;
 
+/**
+ * `fetch` rejette avec un `TypeError` opaque ("Failed to fetch") dès que la requête n'aboutit pas :
+ * blocage CORS, API arrêtée, DNS/URL erronée, certificat HTTPS refusé ou poste hors ligne. Le navigateur
+ * réserve le détail à la console : on reconstruit ici un message exploitable. Navigateur uniquement (lit `navigator`/`window`).
+ */
+export const toErrorNetwork = (url: string, method: string): ErrorHttp => {
+  const target = `${method.toUpperCase()} ${url}`;
+
+  return {
+    code: NETWORK_ERROR_CODE,
+    message: `Impossible de joindre l'API (${target}) : ${readNetworkCause(url)}`,
+    errors: null,
+  };
+};
+
 const readCode = (payload: Record<string, unknown>): number | null => {
   const code = payload.Code ?? payload.code;
   return typeof code === "number" ? code : null;
@@ -94,4 +109,27 @@ const readErrors = (payload: Record<string, unknown>): string[] => {
   }
 
   return errors.filter((error): error is string => typeof error === "string" && error.trim() !== "");
+};
+
+const readNetworkCause = (url: string): string => {
+  if (typeof navigator !== "undefined" && !navigator.onLine) {
+    return "votre poste est hors ligne, vérifiez votre connexion réseau.";
+  }
+
+  const origin = typeof window !== "undefined" ? window.location.origin : null;
+  const apiOrigin = readOrigin(url);
+
+  if (origin !== null && apiOrigin !== null && apiOrigin !== origin) {
+    return `la requête a été bloquée avant toute réponse. Causes probables : CORS (l'API doit autoriser l'origine ${origin} via Access-Control-Allow-Origin et répondre au préflight OPTIONS), API arrêtée ou injoignable, certificat HTTPS invalide.`;
+  }
+
+  return "la requête a été bloquée avant toute réponse. Causes probables : API arrêtée ou injoignable, URL incorrecte, certificat HTTPS invalide.";
+};
+
+const readOrigin = (url: string): string | null => {
+  try {
+    return new URL(url).origin;
+  } catch {
+    return null;
+  }
 };

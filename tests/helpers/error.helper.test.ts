@@ -1,4 +1,4 @@
-import { NETWORK_ERROR_CODE, extractErrors, getErrorMessage, getMessage, isErrorNetwork, toErrorHttp } from "../../src/helpers/error.helper";
+import { NETWORK_ERROR_CODE, extractErrors, getErrorMessage, getMessage, isErrorNetwork, toErrorHttp, toErrorNetwork } from "../../src/helpers/error.helper";
 import { describe, it, expect } from "vitest";
 
 describe("extractErrors", () => {
@@ -140,6 +140,22 @@ describe("getErrorMessage", () => {
 
   it("falls back to the generic message for a number", () => {
     expect(getErrorMessage(42)).toBe("Erreur inconnue");
+  });
+});
+
+describe("toErrorNetwork", () => {
+  it("builds an ErrorHttp with the network code and no errors", () => {
+    const result = toErrorNetwork("http://localhost:5000/api/agents", "get");
+    expect(result.code).toBe(NETWORK_ERROR_CODE);
+    expect(result.errors).toBeNull();
+  });
+
+  it("uppercases the method and includes the target in the message", () => {
+    expect(toErrorNetwork("http://localhost:5000/api/agents", "get").message).toContain("GET http://localhost:5000/api/agents");
+  });
+
+  it("is recognised by isErrorNetwork", () => {
+    expect(isErrorNetwork(toErrorNetwork("http://localhost/api", "post"))).toBe(true);
   });
 });
 
