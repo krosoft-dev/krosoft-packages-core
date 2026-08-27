@@ -87,6 +87,10 @@ describe("formatShortDateTimeNoSeconds", () => {
   it("formats date with time but no seconds", () => {
     expect(formatShortDateTimeNoSeconds(DATE)).toBe("15/06/2024 14:30");
   });
+
+  it("accepts a Date instance", () => {
+    expect(formatShortDateTimeNoSeconds(new Date(2024, 5, 15, 14, 30))).toBe("15/06/2024 14:30");
+  });
 });
 
 describe("formatTimeSpan", () => {

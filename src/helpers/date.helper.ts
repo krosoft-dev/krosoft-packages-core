@@ -1,6 +1,6 @@
 import { getLocale } from "./locale.helper";
 
-export const formatFullDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
+export const formatFullDateTime = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") {
     return "";
   }
@@ -14,7 +14,7 @@ export const formatFullDateTime = (dateString: string | null | undefined, locale
     second: "2-digit",
   });
 };
-export const formatShortDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
+export const formatShortDateTime = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") {
     return "";
   }
@@ -29,7 +29,7 @@ export const formatShortDateTime = (dateString: string | null | undefined, local
   });
 };
 
-export const formatShortDate = (dateString: string | null | undefined, locale: string = getLocale()): string => {
+export const formatShortDate = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") {
     return "";
   }
@@ -41,7 +41,7 @@ export const formatShortDate = (dateString: string | null | undefined, locale: s
   });
 };
 
-export const formatShortDateTimeNoSeconds = (dateString: string | null | undefined, locale: string = getLocale()): string => {
+export const formatShortDateTimeNoSeconds = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") {
     return "";
   }
