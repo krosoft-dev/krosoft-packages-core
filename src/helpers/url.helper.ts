@@ -1,6 +1,6 @@
 import { SortOption } from "../types/SortOption";
 
-export function buildUrl(baseUrl: string, params: object, sortBy?: SortOption[]): string {
+export function buildUrl(baseUrl: string, params: object, sortBy?: SortOption[] | null): string {
   const urlParams = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -15,7 +15,7 @@ export function buildUrl(baseUrl: string, params: object, sortBy?: SortOption[])
     }
   });
 
-  if (sortBy !== undefined && sortBy.length > 0) {
+  if (sortBy !== undefined && sortBy !== null && sortBy.length > 0) {
     sortBy.forEach(sortOption => {
       urlParams.append("sortBy", `${sortOption.key}:${sortOption.order}`);
     });

@@ -79,4 +79,18 @@ describe("setCookie — hostOnlyFallback", () => {
     });
     expect(written).toContain("domain=example.com");
   });
+
+  it("deleteCookie drops a non-matching domain when hostOnlyFallback is set", () => {
+    const written = captureWrite(() => {
+      deleteCookie("a", { domain: "example.com", hostOnlyFallback: true });
+    });
+    expect(written).not.toContain("domain=");
+  });
+
+  it("deleteCookie keeps a matching domain with hostOnlyFallback", () => {
+    const written = captureWrite(() => {
+      deleteCookie("a", { domain: "localhost", hostOnlyFallback: true });
+    });
+    expect(written).toContain("domain=localhost");
+  });
 });

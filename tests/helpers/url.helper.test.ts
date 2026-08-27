@@ -56,6 +56,10 @@ describe("buildUrl", () => {
   it("ignores sortBy when array is empty", () => {
     expect(buildUrl("https://api.example.com/items", { page: 1 }, [])).toBe("https://api.example.com/items?page=1");
   });
+
+  it("tolerates a null sortBy", () => {
+    expect(buildUrl("https://api.example.com/items", { page: 1 }, null)).toBe("https://api.example.com/items?page=1");
+  });
 });
 
 describe("normalizeUrl", () => {

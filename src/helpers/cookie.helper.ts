@@ -56,9 +56,10 @@ export const setCookie = (name: string, value: string, options: CookieOptions = 
   document.cookie = `${name}=${encodeURIComponent(value)}${buildAttributes(options)}`;
 };
 
-/** Supprime un cookie (expiration dans le passé). `domain`/`path` doivent correspondre à ceux de l'écriture. */
-export const deleteCookie = (name: string, options: Pick<CookieOptions, "domain" | "path"> = {}): void => {
-  const { domain, path = "/" } = options;
-  const domainPart = domain !== undefined && domain !== "" ? `; domain=${domain}` : "";
+/** Supprime un cookie (expiration dans le passé). `domain`/`path`/`hostOnlyFallback` doivent correspondre à ceux de l'écriture. */
+export const deleteCookie = (name: string, options: Pick<CookieOptions, "domain" | "path" | "hostOnlyFallback"> = {}): void => {
+  const { domain, path = "/", hostOnlyFallback } = options;
+  const includeDomain = domain !== undefined && domain !== "" && (hostOnlyFallback !== true || domainMatchesHost(domain));
+  const domainPart = includeDomain ? `; domain=${domain}` : "";
   document.cookie = `${name}=; path=${path}${domainPart}; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
 };
