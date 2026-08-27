@@ -47,6 +47,24 @@ export const formatShortDateTimeNoSeconds = (dateString: string | null | undefin
   });
 };
 
+/** Date et heure lisibles (ex : « 6 août à 05:40 ») : les étapes d'un suivi de colis se lisent à l'heure près. */
+export const formatDateTime = (date: Date | string, locale: string = getLocale()): string =>
+  new Date(date).toLocaleString(locale, { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+
+/** Mois et année en toutes lettres (ex : « août 2026 ») : en-têtes de planning, sélecteurs de mois. */
+export const formatMonthYear = (date: Date | string | null | undefined, locale: string = getLocale()): string => {
+  if (date === null || date === undefined || date === "") return "";
+
+  return new Date(date).toLocaleDateString(locale, { month: "long", year: "numeric" });
+};
+
+/** Format attendu par un `<input type="date">`, en heure locale (pas d'ISO/UTC qui décale à la veille). */
+export const toInputDate = (date: Date | string): string => {
+  const value = typeof date === "string" ? new Date(date) : date;
+
+  return `${String(value.getFullYear())}-${String(value.getMonth() + 1).padStart(2, "0")}-${String(value.getDate()).padStart(2, "0")}`;
+};
+
 export const formatTimeSpan = (timeSpan: string | null | undefined): string => {
   if (timeSpan === null || timeSpan === undefined || timeSpan === "") return "";
 

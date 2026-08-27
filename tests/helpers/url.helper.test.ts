@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildUrl } from "../../src/helpers/url.helper";
+import { buildUrl, getUrlHostname, isValidHttpUrl, normalizeUrl } from "../../src/helpers/url.helper";
 
 describe("buildUrl", () => {
   it("returns baseUrl when params are empty", () => {
@@ -55,5 +55,67 @@ describe("buildUrl", () => {
 
   it("ignores sortBy when array is empty", () => {
     expect(buildUrl("https://api.example.com/items", { page: 1 }, [])).toBe("https://api.example.com/items?page=1");
+  });
+});
+
+describe("normalizeUrl", () => {
+  it("prefixes a schemeless value with https://", () => {
+    expect(normalizeUrl("example.com/path")).toBe("https://example.com/path");
+  });
+
+  it("keeps an existing http scheme", () => {
+    expect(normalizeUrl("http://example.com")).toBe("http://example.com");
+  });
+
+  it("keeps an existing https scheme", () => {
+    expect(normalizeUrl("https://example.com")).toBe("https://example.com");
+  });
+
+  it("trims surrounding whitespace", () => {
+    expect(normalizeUrl("  example.com  ")).toBe("https://example.com");
+  });
+
+  it("returns an empty string for a blank value", () => {
+    expect(normalizeUrl("   ")).toBe("");
+  });
+});
+
+describe("getUrlHostname", () => {
+  it("returns the hostname of an absolute URL", () => {
+    expect(getUrlHostname("https://example.com/path?q=1")).toBe("example.com");
+  });
+
+  it("strips a leading www.", () => {
+    expect(getUrlHostname("https://www.example.com")).toBe("example.com");
+  });
+
+  it("normalizes a schemeless value first", () => {
+    expect(getUrlHostname("example.com/path")).toBe("example.com");
+  });
+
+  it("returns the raw input when it is unparsable", () => {
+    expect(getUrlHostname("http://")).toBe("http://");
+  });
+});
+
+describe("isValidHttpUrl", () => {
+  it("accepts an absolute https url", () => {
+    expect(isValidHttpUrl("https://example.com")).toBe(true);
+  });
+
+  it("accepts a schemeless url with a dotted host", () => {
+    expect(isValidHttpUrl("example.com/path")).toBe(true);
+  });
+
+  it("returns false for a blank value", () => {
+    expect(isValidHttpUrl("   ")).toBe(false);
+  });
+
+  it("rejects localhost by default", () => {
+    expect(isValidHttpUrl("localhost:3000")).toBe(false);
+  });
+
+  it("accepts localhost when allowLocalhost is set", () => {
+    expect(isValidHttpUrl("localhost:3000", { allowLocalhost: true })).toBe(true);
   });
 });

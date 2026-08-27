@@ -5,6 +5,18 @@ export const formatNumber = (value: number | undefined, locale: string = getLoca
   return new Intl.NumberFormat(locale).format(value);
 };
 
+/** Montant formaté en devise (ex : « 12,50 € »). Devise et locale paramétrables ; par défaut EUR dans la locale du package. */
+export const formatCurrency = (value: number | undefined, currency: string = "EUR", locale: string = getLocale()): string => {
+  if (value === undefined) return "";
+  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(value);
+};
+
+/** Somme d'une liste de nombres (`0` pour une liste vide). */
+export const sum = (values: number[]): number => values.reduce((acc, value) => acc + value, 0);
+
+/** Moyenne d'une liste de nombres (`0` pour une liste vide). */
+export const average = (values: number[]): number => (values.length === 0 ? 0 : sum(values) / values.length);
+
 /**
  * Suffixes d'ordre de grandeur par langue. Le français garde les siens (o/Ko/Mo/Go)
  * afin que la sortie historique du package reste identique au caractère près ;

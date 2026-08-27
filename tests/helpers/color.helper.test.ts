@@ -1,4 +1,4 @@
-import { hexToRgba } from "../../src/helpers/color.helper";
+import { getContrastingColor, hexToRgba } from "../../src/helpers/color.helper";
 import { describe, it, expect } from "vitest";
 
 describe("hexToRgba", () => {
@@ -32,5 +32,31 @@ describe("hexToRgba", () => {
 
   it("undefined → fallback", () => {
     expect(hexToRgba(undefined, 100)).toBe("rgba(0,16,49,1)");
+  });
+});
+
+describe("getContrastingColor", () => {
+  it("returns black on a light background", () => {
+    expect(getContrastingColor("#ffffff")).toBe("#000000");
+  });
+
+  it("returns white on a dark background", () => {
+    expect(getContrastingColor("#000000")).toBe("#FFFFFF");
+  });
+
+  it("accepts a hex without the leading hash", () => {
+    expect(getContrastingColor("ffff00")).toBe("#000000");
+  });
+
+  it("returns white for null", () => {
+    expect(getContrastingColor(null)).toBe("#FFFFFF");
+  });
+
+  it("returns white for undefined", () => {
+    expect(getContrastingColor(undefined)).toBe("#FFFFFF");
+  });
+
+  it("returns white for an empty string", () => {
+    expect(getContrastingColor("")).toBe("#FFFFFF");
   });
 });
