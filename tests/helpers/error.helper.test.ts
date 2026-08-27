@@ -60,7 +60,6 @@ describe("getMessage", () => {
 describe("toErrorHttp", () => {
   it("exposes joined errors as the message (Pascal case payload)", () => {
     // L'API .NET sérialise les clés en PascalCase : toErrorHttp doit savoir les lire.
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     const payload = { Code: 400, Message: "BadRequest", Errors: ["field required", "invalid value"] };
     expect(toErrorHttp(400, payload)).toEqual({
       code: 400,

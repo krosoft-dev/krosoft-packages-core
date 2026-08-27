@@ -28,7 +28,9 @@ export function buildUrl(baseUrl: string, params: object, sortBy?: SortOption[])
 /** Complète une saisie sans schéma (`example.com/...`) pour en faire une URL absolue en `https://`. Renvoie `""` si vide. */
 export const normalizeUrl = (value: string): string => {
   const trimmed = value.trim();
-  if (trimmed === "") return "";
+  if (trimmed === "") {
+    return "";
+  }
 
   return /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
 };
@@ -50,11 +52,15 @@ export interface HttpUrlOptions {
 /** Vrai si la saisie, une fois normalisée, est une URL http(s) exploitable. Rejette `localhost` sauf `allowLocalhost`. */
 export const isValidHttpUrl = (value: string, options: HttpUrlOptions = {}): boolean => {
   const normalized = normalizeUrl(value);
-  if (normalized === "") return false;
+  if (normalized === "") {
+    return false;
+  }
 
   try {
     const url = new URL(normalized);
-    if (url.protocol !== "http:" && url.protocol !== "https:") return false;
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return false;
+    }
 
     // Un hôte sans point (« localhost », une faute de frappe) est refusé par défaut.
     return options.allowLocalhost === true || url.hostname.includes(".");

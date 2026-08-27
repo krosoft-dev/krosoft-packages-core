@@ -89,7 +89,9 @@ const readMessage = (payload: Record<string, unknown>): string | null => {
 
 const readErrors = (payload: Record<string, unknown>): string[] => {
   const errors = payload.Errors ?? payload.errors;
-  if (!Array.isArray(errors)) return [];
+  if (!Array.isArray(errors)) {
+    return [];
+  }
 
   return errors.filter((error): error is string => typeof error === "string" && error.trim() !== "");
 };

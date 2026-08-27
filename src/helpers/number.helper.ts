@@ -1,13 +1,17 @@
 import { getLocale } from "./locale.helper";
 
 export const formatNumber = (value: number | undefined, locale: string = getLocale()): string => {
-  if (value === undefined) return "";
+  if (value === undefined) {
+    return "";
+  }
   return new Intl.NumberFormat(locale).format(value);
 };
 
 /** Montant formaté en devise (ex : « 12,50 € »). Devise et locale paramétrables ; par défaut EUR dans la locale du package. */
 export const formatCurrency = (value: number | undefined, currency: string = "EUR", locale: string = getLocale()): string => {
-  if (value === undefined) return "";
+  if (value === undefined) {
+    return "";
+  }
   return new Intl.NumberFormat(locale, { style: "currency", currency }).format(value);
 };
 
@@ -32,8 +36,14 @@ const sizeUnits = (locale: string): readonly [string, string, string, string] =>
 export const formatSize = (bytes: number, locale: string = getLocale()): string => {
   const [byte, kilo, mega, giga] = sizeUnits(locale);
 
-  if (bytes >= 1_073_741_824) return `${(bytes / 1_073_741_824).toFixed(2)} ${giga}`;
-  if (bytes >= 1_048_576) return `${(bytes / 1_048_576).toFixed(2)} ${mega}`;
-  if (bytes >= 1024) return `${(bytes / 1024).toFixed(2)} ${kilo}`;
+  if (bytes >= 1_073_741_824) {
+    return `${(bytes / 1_073_741_824).toFixed(2)} ${giga}`;
+  }
+  if (bytes >= 1_048_576) {
+    return `${(bytes / 1_048_576).toFixed(2)} ${mega}`;
+  }
+  if (bytes >= 1024) {
+    return `${(bytes / 1024).toFixed(2)} ${kilo}`;
+  }
   return `${bytes.toString()} ${byte}`;
 };

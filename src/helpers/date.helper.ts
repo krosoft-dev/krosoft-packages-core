@@ -1,7 +1,9 @@
 import { getLocale } from "./locale.helper";
 
 export const formatFullDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
-  if (dateString === null || dateString === undefined || dateString === "") return "";
+  if (dateString === null || dateString === undefined || dateString === "") {
+    return "";
+  }
 
   return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
@@ -13,7 +15,9 @@ export const formatFullDateTime = (dateString: string | null | undefined, locale
   });
 };
 export const formatShortDateTime = (dateString: string | null | undefined, locale: string = getLocale()): string => {
-  if (dateString === null || dateString === undefined || dateString === "") return "";
+  if (dateString === null || dateString === undefined || dateString === "") {
+    return "";
+  }
 
   return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
@@ -26,7 +30,9 @@ export const formatShortDateTime = (dateString: string | null | undefined, local
 };
 
 export const formatShortDate = (dateString: string | null | undefined, locale: string = getLocale()): string => {
-  if (dateString === null || dateString === undefined || dateString === "") return "";
+  if (dateString === null || dateString === undefined || dateString === "") {
+    return "";
+  }
 
   return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
@@ -36,7 +42,9 @@ export const formatShortDate = (dateString: string | null | undefined, locale: s
 };
 
 export const formatShortDateTimeNoSeconds = (dateString: string | null | undefined, locale: string = getLocale()): string => {
-  if (dateString === null || dateString === undefined || dateString === "") return "";
+  if (dateString === null || dateString === undefined || dateString === "") {
+    return "";
+  }
 
   return new Date(dateString).toLocaleDateString(locale, {
     year: "numeric",
@@ -53,7 +61,9 @@ export const formatDateTime = (date: Date | string, locale: string = getLocale()
 
 /** Mois et année en toutes lettres (ex : « août 2026 ») : en-têtes de planning, sélecteurs de mois. */
 export const formatMonthYear = (date: Date | string | null | undefined, locale: string = getLocale()): string => {
-  if (date === null || date === undefined || date === "") return "";
+  if (date === null || date === undefined || date === "") {
+    return "";
+  }
 
   return new Date(date).toLocaleDateString(locale, { month: "long", year: "numeric" });
 };
@@ -66,7 +76,9 @@ export const toInputDate = (date: Date | string): string => {
 };
 
 export const formatTimeSpan = (timeSpan: string | null | undefined): string => {
-  if (timeSpan === null || timeSpan === undefined || timeSpan === "") return "";
+  if (timeSpan === null || timeSpan === undefined || timeSpan === "") {
+    return "";
+  }
 
   // Format attendu: "0:00:00:28.7797708" (jours:heures:minutes:secondes.millisecondes)
   const parts = timeSpan.split(":");
