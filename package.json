@@ -31,7 +31,7 @@
     "@krosoft/tooling-prettier": "^0.0.18",
     "@krosoft/tooling-tsconfig": "^0.0.7",
     "prettier": "^3.9.6",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "jsdom": "^30.0.1",
     "vitest": "^4.1.11"
   }
