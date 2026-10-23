@@ -29,6 +29,26 @@ export const formatShortDateTime = (dateString: Date | string | null | undefined
   });
 };
 
+/** Date et heure à la milliseconde (ex : « 23/10/2026 21:31:31,790 ») : départage des événements rapprochés. */
+export const formatPreciseDateTime = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
+  if (dateString === null || dateString === undefined || dateString === "") {
+    return "";
+  }
+
+  // `fractionalSecondDigits` (ES2021) est absent de la lib TS du tooling partagé : typé localement.
+  const options: Intl.DateTimeFormatOptions & { fractionalSecondDigits: 1 | 2 | 3 } = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    fractionalSecondDigits: 3,
+  };
+
+  return new Date(dateString).toLocaleString(locale, options);
+};
+
 export const formatShortDate = (dateString: Date | string | null | undefined, locale: string = getLocale()): string => {
   if (dateString === null || dateString === undefined || dateString === "") {
     return "";
